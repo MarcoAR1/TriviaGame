@@ -7,12 +7,18 @@ const UseStyles = makeStyles({
     textTransform: "capitalize",
   },
   img: {
-    maxWidth: "75%",
+    maxWidth: "80%",
     margin: "0 auto",
   },
   Card: {
-    maxWidth: "90%",
+    margin: "3rem auto",
+    maxWidth: "33%",
+    minWidth: "250px",
+    "@media (max-width:700px)": {
+      margin: "3rem auto",
+      maxWidth: "51%",
+    },
   },
 });
 
-export { UseStyles };
+export default UseStyles;

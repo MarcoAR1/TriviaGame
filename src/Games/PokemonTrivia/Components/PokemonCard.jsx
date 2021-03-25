@@ -1,6 +1,6 @@
-/* import { React, useState, useEffect } from "react";
-import { UseStyles } from "../Games/PokemonTrivia/Style/PokemonCardStyle.jsx";
-import { getDataPokemon } from "../Games/PokemonTrivia/Data/PokemonList.jsx";
+import { React, useState, useEffect } from "react";
+import UseStyles from "../Style/PokemonCardStyle.jsx";
+import getDataPokemon from "../Data/PokemonList.jsx";
 import {
   Card,
   CardMedia,
@@ -11,7 +11,7 @@ import {
   GridList,
   GridListTile,
 } from "@material-ui/core";
-function CardTrivia() {
+function PokemonCard() {
   const clases = UseStyles();
   const [counter, SetCounter] = useState(0);
   const [Result, SetResult] = useState("");
@@ -21,7 +21,7 @@ function CardTrivia() {
   const [question, SetQuestion] = useState("");
   const [winOrLosse, SetwinOrLosse] = useState(0);
   const [coluns, SetColuns] = useState(2);
-  const number = () => Math.floor(Math.random() * 879 + 1);
+  const number = () => Math.floor(Math.random() * 1098 + 1);
   const number1Al0 = () => Math.round(Math.random());
   const gameMode = {
     0: () => {
@@ -109,7 +109,10 @@ function CardTrivia() {
                   color="secondary"
                   fullWidth
                   className={clases.texto}
-                  onClick={() => SetwinOrLosse(3)}
+                  onClick={() => {
+                    SetwinOrLosse(3);
+                    SetButton([]);
+                  }}
                 >
                   {e}
                 </Button>
@@ -159,4 +162,4 @@ function CardTrivia() {
   );
 }
 
-export default CardTrivia; */
+export default PokemonCard;
