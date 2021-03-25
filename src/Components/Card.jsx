@@ -13,24 +13,37 @@ import {
 } from "@material-ui/core";
 function CardTrivia() {
   const clases = UseStyles();
-  const [Result, SetResult] = useState([]);
+  const [counter, SetCounter] = useState(0);
+  const [Result, SetResult] = useState("");
   const [img, SetImg] = useState("");
   const [title, SetTitle] = useState("");
   const [buttonMap, SetButton] = useState([]);
+  const [question, SetQuestion] = useState("");
+  const [winOrLosse, SetwinOrLosse] = useState("Start");
   const number = () => Math.floor(Math.random() * 879 + 1);
-  const index = {
+  const number1Al0 = () => Math.round(Math.random());
+  const gameMode = {
     0: () => {
       getDataPokemon(number(), SetResult, SetImg, SetTitle, "", SetButton);
+      SetQuestion("¿Quien es este Pokemon?");
     },
     1: () => {
       getDataPokemon(number(), SetResult, SetImg, SetTitle, SetButton, "");
+      SetQuestion("¿Que tipo es este Pokemon?");
     },
   };
   useEffect(() => {
-    const number1al0 = () => Math.round(Math.random());
-    const number = number1al0();
-    index[number]();
-  }, []);
+    switch (winOrLosse) {
+      case "Win":
+        break;
+      case "Losse":
+        break;
+      default:
+        gameMode[number1Al0()]();
+        break;
+    }
+    // eslint-disable-next-line
+  }, [counter]);
   return (
     <Card className={clases.Card}>
       <CardActionArea>
@@ -51,29 +64,67 @@ function CardTrivia() {
         />
         <CardContent>
           <Typography gutterBottom align="center" variant="h5" component="h2">
-            ¿Quien es este Pokemon?
+            {question}
+          </Typography>
+          <Typography
+            align="center"
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            Tu puntuacion es de:
+          </Typography>
+          <Typography
+            align="center"
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            gutterBottom
+          >
+            {counter}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Elije la Respuesta Correcta
+            Elije la Respuesta Correcta:
           </Typography>
         </CardContent>
       </CardActionArea>
       <GridList cellHeight="auto" cols={2} className={clases.gridButtons}>
         {buttonMap.map((e) => {
-          return (
-            <GridListTile align="center" key={e}>
-              <Button
-                align="center"
-                key={e}
-                variant="contained"
-                color="primary"
-                fullWidth
-                className={clases.texto}
-              >
-                {e}
-              </Button>
-            </GridListTile>
-          );
+          if (e === Result) {
+            return (
+              <GridListTile align="center" key={e}>
+                <Button
+                  align="center"
+                  key={e}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  className={clases.texto}
+                  onClick={() => SetCounter(parseInt(counter) + 1)}
+                >
+                  {e}
+                </Button>
+              </GridListTile>
+            );
+          } else {
+            return (
+              <GridListTile align="center" key={e}>
+                <Button
+                  align="center"
+                  key={e}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  className={clases.texto}
+                  onClick={() => {
+                    SetwinOrLosse("Losse");
+                  }}
+                >
+                  {e}
+                </Button>
+              </GridListTile>
+            );
+          }
         })}
       </GridList>
     </Card>
