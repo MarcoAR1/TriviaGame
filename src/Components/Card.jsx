@@ -19,7 +19,7 @@ function CardTrivia() {
   const [title, SetTitle] = useState("");
   const [buttonMap, SetButton] = useState([]);
   const [question, SetQuestion] = useState("");
-  const [winOrLosse, SetwinOrLosse] = useState("Start");
+  const [winOrLosse, SetwinOrLosse] = useState(0);
   const number = () => Math.floor(Math.random() * 879 + 1);
   const number1Al0 = () => Math.round(Math.random());
   const gameMode = {
@@ -34,16 +34,23 @@ function CardTrivia() {
   };
   useEffect(() => {
     switch (winOrLosse) {
-      case "Win":
+      case 1:
+        gameMode[number1Al0()]();
         break;
-      case "Losse":
+      case 2:
+        SetButton(["Restar Game"]);
+        break;
+      case 3:
+        console.log("Aqui Toy");
+        SetCounter(0);
+        gameMode[number1Al0()]();
         break;
       default:
         gameMode[number1Al0()]();
         break;
     }
     // eslint-disable-next-line
-  }, [counter]);
+  }, [winOrLosse, counter]);
   return (
     <Card className={clases.Card}>
       <CardActionArea>
@@ -90,7 +97,7 @@ function CardTrivia() {
       </CardActionArea>
       <GridList cellHeight="auto" cols={2} className={clases.gridButtons}>
         {buttonMap.map((e) => {
-          if (e === Result) {
+          if (e === "Restar Game") {
             return (
               <GridListTile align="center" key={e}>
                 <Button
@@ -100,7 +107,26 @@ function CardTrivia() {
                   color="primary"
                   fullWidth
                   className={clases.texto}
-                  onClick={() => SetCounter(parseInt(counter) + 1)}
+                  onClick={() => SetwinOrLosse(3)}
+                >
+                  {e}
+                </Button>
+              </GridListTile>
+            );
+          } else if (e === Result) {
+            return (
+              <GridListTile align="center" key={e}>
+                <Button
+                  align="center"
+                  key={e}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  className={clases.texto}
+                  onClick={() => {
+                    SetCounter(parseInt(counter) + 1);
+                    SetwinOrLosse(1);
+                  }}
                 >
                   {e}
                 </Button>
@@ -117,7 +143,7 @@ function CardTrivia() {
                   fullWidth
                   className={clases.texto}
                   onClick={() => {
-                    SetwinOrLosse("Losse");
+                    SetwinOrLosse(2);
                   }}
                 >
                   {e}

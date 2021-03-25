@@ -11,7 +11,7 @@ const UseStyles = makeStyles({
     margin: "0 auto",
   },
   Card: {
-    maxWidth: "auto",
+    maxWidth: "90%",
   },
 });
 
