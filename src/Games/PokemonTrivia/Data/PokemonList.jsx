@@ -57,7 +57,7 @@ const getDataPokemon = async (x, result, img, title, type, choise) => {
       type(types.sort((a, b) => a.localeCompare(b) * -1));
     }
   } catch (error) {
-    console.log(error);
+    getDataPokemon(x, result, img, title, type, choise);
   }
 };
 export { getDataPokemon };
