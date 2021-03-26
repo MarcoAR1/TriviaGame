@@ -21,7 +21,7 @@ function PokemonCard() {
   const [question, SetQuestion] = useState("");
   const [winOrLosse, SetwinOrLosse] = useState(0);
   const [coluns, SetColuns] = useState(2);
-  const number = () => Math.floor(Math.random() * 1098 + 1);
+  const number = () => Math.floor(Math.random() * 898 + 1);
   const number1Al0 = () => Math.round(Math.random());
   const gameMode = {
     0: () => {

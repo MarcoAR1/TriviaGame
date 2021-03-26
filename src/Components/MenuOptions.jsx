@@ -1,20 +1,40 @@
 import React from "react";
-import { Divider, Drawer } from "@material-ui/core";
+import clsx from "clsx";
+import theme from "../StyleTheme/temaConfig.jsx";
+import { Divider, Drawer, ListItem, IconButton } from "@material-ui/core";
 import Opciones from "./Opciones";
 import UseStyles from "../StyleTheme/AllGameStyle.jsx";
-const MenuOptions = () => {
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+const MenuOptions = (props) => {
+  const state = props.state;
+  const dispatch = props.dispatch;
   const clases = UseStyles();
+  const handleDrawerClose = () => {
+    dispatch({ type: "false" });
+  };
   return (
     <div>
       <Drawer
-        className={clases.drawer}
+        className={clsx(clases.drawer, !state.open && clases.hide)}
         variant="permanent"
+        anchor="left"
+        open={state.open}
         classes={{
           paper: clases.drawerPaper,
         }}
-        anchor="left"
       >
-        <div className={clases.toolbar}></div>
+        <div className={clases.drawerHeader}>
+          <ListItem>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "ltr" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+          </ListItem>
+        </div>
         <Divider />
         <Opciones />
       </Drawer>

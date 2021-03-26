@@ -1,12 +1,18 @@
 import { React } from "react";
+import clsx from "clsx";
 import PokemonCard from "./Components/PokemonCard";
 import UseStyles from "../../StyleTheme/AllGameStyle.jsx";
 
-function PokemonIndex() {
+function PokemonIndex(props) {
+  const state = props.state;
   const clases = UseStyles();
   return (
-    <div className={clases.content}>
-      <div className={clases.toolbar}></div>
+    <div
+      className={clsx(clases.content, {
+        [clases.contentShift]: !state.open,
+      })}
+    >
+      <div className={clases.drawerHeader}></div>
       <PokemonCard />
     </div>
   );

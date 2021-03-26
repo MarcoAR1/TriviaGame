@@ -17,7 +17,7 @@ const getDataPokemon = async (x, result, img, title, type, choise) => {
       const choises = [];
       choises.push(namepoke);
       for (let i = 0; i < 3; i += 1) {
-        const number = Math.floor(Math.random() * 1098 - 1);
+        const number = Math.floor(Math.random() * 900 - 1);
         const url = `https://pokeapi.co/api/v2/pokemon/${number}`;
         const reqPokemon = await fetch(url);
         const pokemonData = await reqPokemon.json();
@@ -40,7 +40,7 @@ const getDataPokemon = async (x, result, img, title, type, choise) => {
       result(typeElements);
       typeElements = "";
       for (let i = 0; i < 3; i += 1) {
-        const number = Math.floor(Math.random() * 1098 - 1);
+        const number = Math.floor(Math.random() * 900 - 1);
         const url = `https://pokeapi.co/api/v2/pokemon/${number}`;
         const reqPokemon = await fetch(url);
         const pokemonData = await reqPokemon.json();
