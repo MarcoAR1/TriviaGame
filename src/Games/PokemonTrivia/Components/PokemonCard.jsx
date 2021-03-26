@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from "react";
+import clsx from "clsx";
 import UseStyles from "../Style/PokemonCardStyle.jsx";
 import getDataPokemon from "../Data/PokemonList.jsx";
+import "../Style/PokemonCardStyle.css";
 import {
   Card,
   CardMedia,
@@ -15,6 +17,7 @@ function PokemonCard() {
   const clases = UseStyles();
   const [counter, SetCounter] = useState(0);
   const [Result, SetResult] = useState("");
+  const [flip, Setflip] = useState(true);
   const [img, SetImg] = useState("");
   const [title, SetTitle] = useState("");
   const [buttonMap, SetButton] = useState([]);
@@ -27,10 +30,12 @@ function PokemonCard() {
     0: () => {
       getDataPokemon(number(), SetResult, SetImg, SetTitle, "", SetButton);
       SetQuestion("¿Quien es este Pokemon?");
+      Setflip(!flip ? true : false);
     },
     1: () => {
       getDataPokemon(number(), SetResult, SetImg, SetTitle, SetButton, "");
       SetQuestion("¿Que tipo es este Pokemon?");
+      Setflip(!flip ? true : false);
     },
   };
   useEffect(() => {
@@ -41,9 +46,9 @@ function PokemonCard() {
       case 2:
         SetButton(["Restar Game"]);
         SetColuns(1);
+
         break;
       case 3:
-        console.log("Aqui Toy");
         SetCounter(0);
         SetColuns(2);
         gameMode[number1Al0()]();
@@ -55,7 +60,7 @@ function PokemonCard() {
     // eslint-disable-next-line
   }, [winOrLosse, counter]);
   return (
-    <Card className={clases.Card}>
+    <Card className={clsx(clases.Card, flip && "flip-vertical-right")}>
       <CardActionArea>
         <Typography
           className={clases.texto}
@@ -112,6 +117,7 @@ function PokemonCard() {
                   onClick={() => {
                     SetwinOrLosse(3);
                     SetButton([]);
+                    Setflip(false);
                   }}
                 >
                   {e}
@@ -131,6 +137,7 @@ function PokemonCard() {
                   onClick={() => {
                     SetCounter(parseInt(counter) + 1);
                     SetwinOrLosse(1);
+                    Setflip(false);
                   }}
                 >
                   {e}
@@ -149,6 +156,7 @@ function PokemonCard() {
                   className={clases.texto}
                   onClick={() => {
                     SetwinOrLosse(2);
+                    Setflip(false);
                   }}
                 >
                   {e}

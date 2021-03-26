@@ -9,14 +9,25 @@ const UseStyles = makeStyles({
   img: {
     maxWidth: "80%",
     margin: "0 auto",
+    "@media (max-width:375px)": {
+      maxWidth: "100%",
+    },
+    "@media (max-width:325px)": {
+      maxWidth: "65%",
+    },
   },
   Card: {
-    margin: "3rem auto",
+    margin: "0 auto",
     maxWidth: "33%",
-    minWidth: "250px",
-    "@media (max-width:700px)": {
-      margin: "3rem auto",
-      maxWidth: "51%",
+    minWidth: "350px",
+    "@media (max-width:500px)": {
+      maxWidth: "100%",
+      minWidth: "250px",
+      margin: 0,
+    },
+    "@media (max-width:325px)": {
+      maxWidth: "65%",
+      minWidth: "250px",
     },
   },
 });
