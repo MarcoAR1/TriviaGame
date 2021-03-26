@@ -13,6 +13,16 @@ import {
   GridList,
   GridListTile,
 } from "@material-ui/core";
+
+
+
+
+
+
+
+
+
+
 function PokemonCard() {
   const clases = UseStyles();
   const [counter, SetCounter] = useState(0);
