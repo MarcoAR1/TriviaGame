@@ -1,7 +1,7 @@
-import { React, useState, useEffect } from "react";
+import React, { useEffect, useReducer } from "react";
 import clsx from "clsx";
 import UseStyles from "../Style/PokemonCardStyle.jsx";
-import getDataPokemon from "../Data/PokemonList.jsx";
+import { getDataPokemon, reducer, initialState } from "../Data/PokemonList.jsx";
 import "../Style/PokemonCardStyle.css";
 import {
   Card,
@@ -14,53 +14,64 @@ import {
   GridListTile,
 } from "@material-ui/core";
 
-
-
-
-
-
-
-
-
-
 function PokemonCard() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const {
+    counter,
+    Result,
+    flip,
+    img,
+    title,
+    buttonMap,
+    question,
+    winOrLosse,
+    coluns,
+  } = state;
   const clases = UseStyles();
-  const [counter, SetCounter] = useState(0);
-  const [Result, SetResult] = useState("");
-  const [flip, Setflip] = useState(true);
-  const [img, SetImg] = useState("");
-  const [title, SetTitle] = useState("");
-  const [buttonMap, SetButton] = useState([]);
-  const [question, SetQuestion] = useState("");
-  const [winOrLosse, SetwinOrLosse] = useState(0);
-  const [coluns, SetColuns] = useState(2);
   const number = () => Math.floor(Math.random() * 898 + 1);
   const number1Al0 = () => Math.round(Math.random());
   const gameMode = {
     0: () => {
-      getDataPokemon(number(), SetResult, SetImg, SetTitle, "", SetButton);
-      SetQuestion("¿Quien es este Pokemon?");
-      Setflip(!flip ? true : false);
+      getDataPokemon(number(), dispatch, dispatch, dispatch, "", dispatch);
+      dispatch({
+        type: "question",
+        question: "¿Quien es este Pokemon?",
+      });
+      dispatch({
+        type: "flip",
+        flip: !flip ? true : false,
+      });
     },
     1: () => {
-      getDataPokemon(number(), SetResult, SetImg, SetTitle, SetButton, "");
-      SetQuestion("¿Que tipo es este Pokemon?");
-      Setflip(!flip ? true : false);
+      getDataPokemon(number(), dispatch, dispatch, dispatch, dispatch, "");
+      dispatch({
+        type: "question",
+        question: "¿Que tipo es este Pokemon?",
+      });
+      dispatch({
+        type: "flip",
+        flip: !flip ? true : false,
+      });
     },
   };
   useEffect(() => {
     switch (winOrLosse) {
-      case 1:
+      case "Win":
         gameMode[number1Al0()]();
         break;
-      case 2:
-        SetButton(["Restar Game"]);
-        SetColuns(1);
+      case "Lose":
+        dispatch({
+          type: "coluns",
+          coluns: 1,
+        });
+        dispatch({
+          type: "buttonMap",
+          buttonMap: ["Restar Game"],
+        });
 
         break;
-      case 3:
-        SetCounter(0);
-        SetColuns(2);
+      case "Restart":
+        dispatch({ type: "Reset", counter: 0, coluns: 2 });
         gameMode[number1Al0()]();
         break;
       default:
@@ -125,9 +136,18 @@ function PokemonCard() {
                   fullWidth
                   className={clases.texto}
                   onClick={() => {
-                    SetwinOrLosse(3);
-                    SetButton([]);
-                    Setflip(false);
+                    dispatch({
+                      type: "winOrLosse",
+                      winOrLosse: "Restart",
+                    });
+                    dispatch({
+                      type: "buttonMap",
+                      buttonMap: [],
+                    });
+                    dispatch({
+                      type: "flip",
+                      flip: false,
+                    });
                   }}
                 >
                   {e}
@@ -145,9 +165,17 @@ function PokemonCard() {
                   fullWidth
                   className={clases.texto}
                   onClick={() => {
-                    SetCounter(parseInt(counter) + 1);
-                    SetwinOrLosse(1);
-                    Setflip(false);
+                    dispatch({
+                      type: "Increse",
+                    });
+                    dispatch({
+                      type: "winOrLosse",
+                      winOrLosse: "Win",
+                    });
+                    dispatch({
+                      type: "flip",
+                      flip: false,
+                    });
                   }}
                 >
                   {e}
@@ -165,8 +193,14 @@ function PokemonCard() {
                   fullWidth
                   className={clases.texto}
                   onClick={() => {
-                    SetwinOrLosse(2);
-                    Setflip(false);
+                    dispatch({
+                      type: "winOrLosse",
+                      winOrLosse: "Lose",
+                    });
+                    dispatch({
+                      type: "flip",
+                      flip: false,
+                    });
                   }}
                 >
                   {e}

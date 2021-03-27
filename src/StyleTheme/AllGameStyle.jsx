@@ -55,6 +55,42 @@ const UseStyles = makeStyles((theme) => ({
   hide: {
     display: "none",
   },
+  gridSelection: {
+    margin: `0 0 0 ${drawerWidth}px`,
+    "@media (max-width:500px)": {
+      margin: `0`,
+    },
+  },
+  fristGridImg: {
+    width: "100%",
+    height: "auto",
+    margin: "0 auto",
+  },
+  gridFrist: {
+    padding: "0 0 1rem 0",
+    "@media (max-width:500px)": {
+      margin: "0 auto",
+      height: "180px",
+    },
+    "@media (max-width:320px)": {
+      height: "140px",
+      margin: "0 auto",
+    },
+  },
+  gridSecond: {
+    padding: "0 1rem 1rem 0",
+  },
+  fristImg: {
+    height: "auto",
+    width: "100%",
+    margin: "0 auto",
+    "@media (max-width:1000px)": {
+      height: "180px",
+    },
+    "@media (max-width:320px)": {
+      height: "140px",
+    },
+  },
 }));
 
 export default UseStyles;

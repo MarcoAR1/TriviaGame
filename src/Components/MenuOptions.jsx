@@ -14,29 +14,28 @@ const MenuOptions = (props) => {
     dispatch({ type: "false" });
   };
   return (
-    <div>
-      <Drawer
-        className={clsx(clases.drawer, !state.open && clases.hide)}
-        variant="permanent"
-        anchor="left"
-        open={state.open}
-        classes={{
-          paper: clases.drawerPaper,
-        }}
-      >
-        <div className={clases.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </div>
-        <Divider />
-        <Opciones />
-      </Drawer>
-    </div>
+    <Drawer
+      className={clsx(clases.drawer, !state.open && clases.hide)}
+      variant="temporary"
+      anchor="left"
+      open={state.open}
+      classes={{
+        paper: clases.drawerPaper,
+      }}
+      onClose={handleDrawerClose}
+    >
+      <div className={clases.drawerHeader}>
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === "ltr" ? (
+            <ChevronLeftIcon />
+          ) : (
+            <ChevronRightIcon />
+          )}
+        </IconButton>
+      </div>
+      <Divider />
+      <Opciones />
+    </Drawer>
   );
 };
 
