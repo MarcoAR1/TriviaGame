@@ -91,6 +91,9 @@ const UseStyles = makeStyles((theme) => ({
       height: "140px",
     },
   },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
 }));
 
 export default UseStyles;

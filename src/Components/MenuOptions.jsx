@@ -1,11 +1,9 @@
 import React from "react";
 import clsx from "clsx";
-import theme from "../StyleTheme/temaConfig.jsx";
 import { Divider, Drawer, IconButton } from "@material-ui/core";
 import Opciones from "./Opciones";
 import UseStyles from "../StyleTheme/AllGameStyle.jsx";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 const MenuOptions = (props) => {
   const state = props.state;
   const dispatch = props.dispatch;
@@ -26,11 +24,7 @@ const MenuOptions = (props) => {
     >
       <div className={clases.drawerHeader}>
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "ltr" ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
+          <ChevronLeftIcon />
         </IconButton>
       </div>
       <Divider />
