@@ -12,7 +12,7 @@ import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import UseStyles from "../StyleTheme/AllGameStyle.jsx";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import VideogameAssetTwoToneIcon from '@material-ui/icons/VideogameAssetTwoTone';
+import VideogameAssetTwoToneIcon from "@material-ui/icons/VideogameAssetTwoTone";
 import { keysMapIndex } from "../Games/Data/InfoGames.jsx";
 const Opciones = () => {
   const clases = UseStyles();

@@ -44,7 +44,11 @@ function AllGame(props) {
               return (
                 <div key={e} className={clases.gridSecond}>
                   <Card>
-                    <CardActionArea href={`/${e}`}>
+                    <CardActionArea
+                      href={
+                        e.replace(/Proximamente\d/g, "") === "" ? "/" : `/${e}`
+                      }
+                    >
                       <CardMedia image={InfoGames[e].img} component="img" />
                     </CardActionArea>
                   </Card>
