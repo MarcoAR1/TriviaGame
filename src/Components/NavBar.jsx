@@ -1,5 +1,11 @@
 import clsx from "clsx";
-import { AppBar, Button, Toolbar, IconButton } from "@material-ui/core";
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  IconButton,
+  Typography,
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import UseStyles from "../StyleTheme/AllGameStyle.jsx";
 function NavBar(props) {
@@ -27,8 +33,10 @@ function NavBar(props) {
         >
           <MenuIcon />
         </IconButton>
-        <Button href="./" color="secondary">
-          Trivia Game
+        <Button href="./">
+          <Typography variant="h6" color="initial">
+            Trivia Game
+          </Typography>
         </Button>
       </Toolbar>
     </AppBar>

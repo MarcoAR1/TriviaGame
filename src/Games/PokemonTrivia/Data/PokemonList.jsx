@@ -1,6 +1,13 @@
 let counterTry = 0;
+const number = () => Math.floor(Math.random() * 898 + 1);
 
-const getDataPokemon = async (x, result, img, title, type, choise) => {
+const getDataPokemon = async (x, dispatch, boolean, f) => {
+  /*const{x,result,img,title,type,choise} = dispatch*/
+  let img = {};
+  let result = {};
+  let title = {};
+  let type = {};
+  let choise = {};
   try {
     const url = `https://pokeapi.co/api/v2/pokemon/${x}`;
     const reqPokemon = await fetch(url);
@@ -10,31 +17,32 @@ const getDataPokemon = async (x, result, img, title, type, choise) => {
     ]
       ? pokemonData["sprites"]["other"]["official-artwork"]["front_default"]
       : pokemonData["sprites"]["other"]["dream_world"]["front_default"];
-    img({
-      type: "img",
-      img: imgUrl,
-    });
+    img = imgUrl;
     const namepoke = pokemonData.name.replace(/\W/g, " ");
 
-    if (choise) {
-      result({ type: "Result", Result: namepoke });
-      title({ type: "title", title: "????" });
+    if (boolean) {
+      result = namepoke;
+      title = "????";
       const choises = [];
       choises.push(namepoke);
       for (let i = 0; i < 3; i += 1) {
-        const number = Math.floor(Math.random() * 900 - 1);
-        const url = `https://pokeapi.co/api/v2/pokemon/${number}`;
+        const url = `https://pokeapi.co/api/v2/pokemon/${number()}`;
         const reqPokemon = await fetch(url);
         const pokemonData = await reqPokemon.json();
         const namepoke = pokemonData.name.replace(/\W/g, " ");
         choises.push(namepoke);
       }
-      choise({
-        type: "buttonMap",
-        buttonMap: choises.sort((a, b) => a.localeCompare(b) * -1),
+      choise = choises.sort((a, b) => a.localeCompare(b) * -1);
+      dispatch({
+        type: "Data",
+        result: result,
+        title: title,
+        buttonMap: choise,
+        img: img,
+        bolean: boolean,
       });
     } else {
-      title({ type: "title", title: namepoke });
+      title = namepoke;
       const types = {};
       const poketypes = pokemonData.types;
       let typeElements = "";
@@ -45,11 +53,10 @@ const getDataPokemon = async (x, result, img, title, type, choise) => {
         }
       }
       types[typeElements] = typeElements;
-      result({ type: "Result", Result: typeElements });
+      result = typeElements;
       typeElements = "";
       for (let i = 0; i < 3; i += 1) {
-        const number = Math.floor(Math.random() * 900 - 1);
-        const url = `https://pokeapi.co/api/v2/pokemon/${number}`;
+        const url = `https://pokeapi.co/api/v2/pokemon/${number()}`;
         const reqPokemon = await fetch(url);
         const pokemonData = await reqPokemon.json();
         const poketypes = pokemonData.types;
@@ -66,22 +73,21 @@ const getDataPokemon = async (x, result, img, title, type, choise) => {
           typeElements = "";
         }
       }
-      type({
-        type: "buttonMap",
-        buttonMap: Object.keys(types),
+      choise = Object.keys(types);
+      dispatch({
+        type: "Data",
+        result: result,
+        title: title,
+        buttonMap: choise,
+        img: img,
+        bolean: boolean,
+        flip: f,
       });
     }
   } catch (error) {
     counterTry += 1;
     if (counterTry > 5) {
-      await getDataPokemon(
-        Math.floor(Math.random() * 900 - 1),
-        result,
-        img,
-        title,
-        type,
-        choise
-      );
+      await getDataPokemon(number(), result, img, title, type, choise);
     } else {
       await getDataPokemon(x, result, img, title, type, choise);
     }
@@ -94,51 +100,43 @@ const reducer = (state, action) => {
         ...state,
         counter: parseInt(state.counter) + 1,
       };
-    case "Result":
-      return {
-        ...state,
-        Result: action.Result,
-      };
     case "flip":
       return {
         ...state,
         flip: action.flip,
       };
-    case "img":
-      return {
-        ...state,
-        img: action.img,
-      };
-    case "title":
-      return {
-        ...state,
-        title: action.title,
-      };
     case "buttonMap":
       return {
         ...state,
         buttonMap: action.buttonMap,
-      };
-    case "question":
-      return {
-        ...state,
-        question: action.question,
+        coluns: action.buttonMap[0] === "Restar Game" ? 1 : state.coluns,
       };
     case "winOrLosse":
       return {
         ...state,
         winOrLosse: action.winOrLosse,
-      };
-    case "coluns":
-      return {
-        ...state,
-        coluns: action.coluns,
+        flip: false,
+        counter:
+          action.winOrLosse === "Win" ? state.counter + 1 : state.counter,
+        buttonMap: action.winOrLosse === "Restar" ? [] : state.buttonMap,
       };
     case "Reset":
       return {
         ...state,
         coluns: action.coluns,
         counter: action.counter,
+      };
+    case "Data":
+      return {
+        ...state,
+        Result: action.result,
+        img: action.img,
+        title: action.title,
+        buttonMap: action.buttonMap,
+        flip: action.flip ? true : false,
+        question: action.bolean
+          ? "¿Quien es este Pokemon?"
+          : "¿Que tipo es este Pokemon?",
       };
 
     default:

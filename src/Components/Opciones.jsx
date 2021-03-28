@@ -4,7 +4,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
   Collapse,
 } from "@material-ui/core";
 import GamesOutlinedIcon from "@material-ui/icons/GamesOutlined";
@@ -57,7 +56,6 @@ const Opciones = () => {
           })}
         </List>
       </Collapse>
-      <Divider />
       <ListItem key={"record"} button>
         <ListItemIcon>
           <StarBorderOutlinedIcon />

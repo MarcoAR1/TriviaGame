@@ -13,8 +13,7 @@ import {
   GridList,
   GridListTile,
 } from "@material-ui/core";
-
-function PokemonCard() {
+const PokemonCard = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     counter,
@@ -31,27 +30,11 @@ function PokemonCard() {
   const number = () => Math.floor(Math.random() * 898 + 1);
   const number1Al0 = () => Math.round(Math.random());
   const gameMode = {
-    0: () => {
-      getDataPokemon(number(), dispatch, dispatch, dispatch, "", dispatch);
-      dispatch({
-        type: "question",
-        question: "¿Quien es este Pokemon?",
-      });
-      dispatch({
-        type: "flip",
-        flip: !flip ? true : false,
-      });
+    0: (value = true) => {
+      getDataPokemon(number(), dispatch, true, value);
     },
-    1: () => {
-      getDataPokemon(number(), dispatch, dispatch, dispatch, dispatch, "");
-      dispatch({
-        type: "question",
-        question: "¿Que tipo es este Pokemon?",
-      });
-      dispatch({
-        type: "flip",
-        flip: !flip ? true : false,
-      });
+    1: (value = true) => {
+      getDataPokemon(number(), dispatch, false, value);
     },
   };
   useEffect(() => {
@@ -61,21 +44,16 @@ function PokemonCard() {
         break;
       case "Lose":
         dispatch({
-          type: "coluns",
-          coluns: 1,
-        });
-        dispatch({
           type: "buttonMap",
           buttonMap: ["Restar Game"],
         });
-
         break;
       case "Restart":
         dispatch({ type: "Reset", counter: 0, coluns: 2 });
         gameMode[number1Al0()]();
         break;
       default:
-        gameMode[number1Al0()]();
+        gameMode[number1Al0()](false);
         break;
     }
     // eslint-disable-next-line
@@ -140,14 +118,6 @@ function PokemonCard() {
                       type: "winOrLosse",
                       winOrLosse: "Restart",
                     });
-                    dispatch({
-                      type: "buttonMap",
-                      buttonMap: [],
-                    });
-                    dispatch({
-                      type: "flip",
-                      flip: false,
-                    });
                   }}
                 >
                   {e}
@@ -166,15 +136,8 @@ function PokemonCard() {
                   className={clases.texto}
                   onClick={() => {
                     dispatch({
-                      type: "Increse",
-                    });
-                    dispatch({
                       type: "winOrLosse",
                       winOrLosse: "Win",
-                    });
-                    dispatch({
-                      type: "flip",
-                      flip: false,
                     });
                   }}
                 >
@@ -197,10 +160,6 @@ function PokemonCard() {
                       type: "winOrLosse",
                       winOrLosse: "Lose",
                     });
-                    dispatch({
-                      type: "flip",
-                      flip: false,
-                    });
                   }}
                 >
                   {e}
@@ -212,6 +171,6 @@ function PokemonCard() {
       </GridList>
     </Card>
   );
-}
+};
 
-export default PokemonCard;
+export default React.memo(PokemonCard);

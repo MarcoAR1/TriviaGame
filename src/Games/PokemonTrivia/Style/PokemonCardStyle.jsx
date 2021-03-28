@@ -17,9 +17,6 @@ const UseStyles = makeStyles({
     },
   },
   Card: {
-    margin: "0 auto",
-    maxWidth: "33%",
-    minWidth: "350px",
     "@media (max-width:500px)": {
       maxWidth: "100%",
       minWidth: "250px",

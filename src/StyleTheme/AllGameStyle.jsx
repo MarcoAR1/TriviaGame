@@ -61,38 +61,43 @@ const UseStyles = makeStyles((theme) => ({
       margin: `0`,
     },
   },
-  fristGridImg: {
-    width: "100%",
-    height: "auto",
-    margin: "0 auto",
-  },
-  gridFrist: {
-    padding: "0 0 1rem 0",
-    "@media (max-width:500px)": {
-      margin: "0 auto",
-      height: "180px",
-    },
-    "@media (max-width:320px)": {
-      height: "140px",
-      margin: "0 auto",
-    },
-  },
-  gridSecond: {
-    padding: "0 1rem 1rem 0",
-  },
-  fristImg: {
-    height: "auto",
-    width: "100%",
-    margin: "0 auto",
-    "@media (max-width:1000px)": {
-      height: "180px",
-    },
-    "@media (max-width:320px)": {
-      height: "140px",
-    },
-  },
   nested: {
     paddingLeft: theme.spacing(4),
+  },
+  PokemonGame: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    "@media (max-width:1490px)": {
+      flexDirection: "column",
+    },
+  },
+  PokemonGameLeft: {
+    width: "475px",
+    flexGrow: "0",
+    order: "1",
+    "@media (max-width:960px)": {
+      order: "2",
+    },
+  },
+  PokemonGameCard: {
+    order: "2",
+    "@media (max-width:960px)": {
+      order: "1",
+    },
+  },
+  PokemonGameRecord: {
+    maxWidth: "475px",
+    flexGrow: "0",
+    order: "3",
+    width: "auto",
+    "@media (max-width:1490px)": {
+      padding: "0.51rem",
+      maxWidth: "447px",
+    },
+  },
+  recordGame: {
+    maxHeight: "577px",
   },
 }));
 

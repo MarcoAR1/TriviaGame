@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { keysMapIndex, InfoGames } from "./Games/Data/InfoGames.jsx";
 import AllGame from "./AllGame.jsx";
 import Proximamente from "./Games/Proximamente.jsx";
-
 function Inicio() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const clases = UseStyles();

@@ -1,7 +1,13 @@
 import React from "react";
 import clsx from "clsx";
 import UseStyles from "./StyleTheme/AllGameStyle.jsx";
-import { Grid, Card, CardActionArea, CardMedia } from "@material-ui/core";
+import {
+  Card,
+  CardActionArea,
+  CardMedia,
+  GridList,
+  GridListTile,
+} from "@material-ui/core";
 import { keysMapIndex, InfoGames } from "./Games/Data/InfoGames.jsx";
 
 function AllGame(props) {
@@ -12,37 +18,21 @@ function AllGame(props) {
     <div className={clsx(clases.content, clases.contentShift)}>
       <div className={clases.drawerHeader}></div>
       <div className={clsx(state.open && clases.gridSelection)}>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="flex-start"
-        >
+        <GridList cellHeight="auto" cols={3}>
           {keysMapIndex.map((e, i) => {
             if (i === 0) {
               return (
-                <Grid
-                  container
-                  direction="column"
-                  justify="center"
-                  alignItems="center"
-                  className={clases.gridFrist}
-                  key={e}
-                >
-                  <Card className={clases.fristGridImg}>
+                <GridListTile cols={3} key={e}>
+                  <Card>
                     <CardActionArea href={`/${e}`}>
-                      <CardMedia
-                        className={clases.fristImg}
-                        component="img"
-                        image={InfoGames[e].img}
-                      />
+                      <CardMedia component="img" image={InfoGames[e].img} />
                     </CardActionArea>
                   </Card>
-                </Grid>
+                </GridListTile>
               );
             } else {
               return (
-                <div key={e} className={clases.gridSecond}>
+                <GridListTile key={e} cls={1}>
                   <Card>
                     <CardActionArea
                       href={
@@ -52,11 +42,11 @@ function AllGame(props) {
                       <CardMedia image={InfoGames[e].img} component="img" />
                     </CardActionArea>
                   </Card>
-                </div>
+                </GridListTile>
               );
             }
           })}
-        </Grid>
+        </GridList>
       </div>
     </div>
   );
