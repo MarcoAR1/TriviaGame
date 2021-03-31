@@ -87,17 +87,16 @@ const UseStyles = makeStyles((theme) => ({
     },
   },
   PokemonGameRecord: {
-    maxWidth: "475px",
+    width: "475px",
     flexGrow: "0",
     order: "3",
-    width: "auto",
     "@media (max-width:1490px)": {
       padding: "0.51rem",
       maxWidth: "447px",
     },
   },
   recordGame: {
-    maxHeight: "577px",
+    height: "577px",
   },
 }));
 

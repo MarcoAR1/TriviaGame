@@ -27,6 +27,10 @@ const UseStyles = makeStyles({
       minWidth: "250px",
     },
   },
+  SaveRecord: {
+    background: "#6fbf73",
+    color: "white",
+  },
 });
 
 export default UseStyles;

@@ -21,7 +21,7 @@ function PokemonIndex() {
         </div>
 
         <div className={clases.PokemonGameRecord}>
-          <RecordTable />
+          <RecordTable id_Game={1} />
         </div>
       </div>
     </Box>
