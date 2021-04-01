@@ -161,6 +161,7 @@ const reducer = (state, action) => {
         Result: action.result,
         img: action.img,
         title: action.title,
+        nextRound: true,
         flip: false,
         counter: 0,
         buttonMap: action.buttonMap,
@@ -177,9 +178,15 @@ const reducer = (state, action) => {
         title: action.title,
         buttonMap: action.buttonMap,
         flip: true,
+        nextRound: true,
         question: action.bolean
           ? "¿Quien es este Pokemon?"
           : "¿Que tipo es este Pokemon?",
+      };
+    case "nextround":
+      return {
+        ...state,
+        nextRound: action.nextRound,
       };
 
     default:
@@ -194,6 +201,7 @@ const initialState = {
   title: "",
   buttonMap: [],
   question: "",
+  nextRound: true,
 };
 
 export { getDataPokemon, reducer, initialState };

@@ -11,24 +11,6 @@ import {
   Card,
 } from "@material-ui/core";
 
-/* const createRecord = async (data) => {
-  try {
-    const Solicitud = await fetch(
-      "https://api-trivia-game.herokuapp.com/Records",
-      {
-        method: "POST",
-
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const respuesta = await Solicitud.json();
-  } catch (error) {
-    console.log(error);
-  }
-}; */
 const consultRecords = async (setRecord) => {
   try {
     const Solicitud = await fetch(

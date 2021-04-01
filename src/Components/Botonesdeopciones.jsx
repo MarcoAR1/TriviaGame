@@ -16,7 +16,14 @@ const Botonesdeopciones = (props) => {
   const [alterNotifi, setalterNotifi] = useState(false);
   const [success, setSuccess] = useState(false);
   const [calm, setCalm] = useState(false);
-  const { dispatch, buttonMap, Result, counter, getDataPokemon } = props.props;
+  const {
+    dispatch,
+    buttonMap,
+    Result,
+    counter,
+    getDataPokemon,
+    nextRound,
+  } = props.props;
   const clases = UseStyles();
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -75,9 +82,14 @@ const Botonesdeopciones = (props) => {
                   color="secondary"
                   fullWidth
                   className={clases.texto}
-                  onClick={() => {
-                    getDataPokemon(dispatch, "reset");
-                  }}
+                  onClick={
+                    nextRound
+                      ? () => {
+                          dispatch({ type: "nextround", NextRound: false });
+                          getDataPokemon(dispatch, "reset");
+                        }
+                      : undefined
+                  }
                 >
                   {e}
                 </Button>
@@ -132,9 +144,14 @@ const Botonesdeopciones = (props) => {
                 color="primary"
                 fullWidth
                 className={clases.texto}
-                onClick={() => {
-                  getDataPokemon(dispatch, "win");
-                }}
+                onClick={
+                  nextRound
+                    ? () => {
+                        dispatch({ type: "nextround", NextRound: false });
+                        getDataPokemon(dispatch, "win");
+                      }
+                    : undefined
+                }
               >
                 {e}
               </Button>
@@ -150,12 +167,16 @@ const Botonesdeopciones = (props) => {
                 color="primary"
                 fullWidth
                 className={clases.texto}
-                onClick={() => {
-                  dispatch({
-                    type: "buttonMap",
-                    buttonMap: ["Restar Game"],
-                  });
-                }}
+                onClick={
+                  nextRound
+                    ? () => {
+                        dispatch({
+                          type: "buttonMap",
+                          buttonMap: ["Restar Game"],
+                        });
+                      }
+                    : undefined
+                }
               >
                 {e}
               </Button>

@@ -8,7 +8,7 @@ import "../Style/PokemonCardStyle.css";
 import { Card } from "@material-ui/core";
 const PokemonCard = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { counter, Result, flip, img, title, buttonMap, question } = state;
+  const { counter, Result, flip, img, title, buttonMap, question, nextRound } = state;
   const clases = UseStyles();
   if (flip) {
     if (document.getElementById("PokemonCard")) {
@@ -26,7 +26,7 @@ const PokemonCard = () => {
     <Card id="PokemonCard" className={clsx(clases.Card)}>
       <TextAndImg props={{ title, img, question, counter }} />
       <Botonesdeopciones
-        props={{ dispatch, buttonMap, Result, counter, getDataPokemon }}
+        props={{ dispatch, buttonMap, Result, counter, getDataPokemon, nextRound }}
       />
     </Card>
   );
