@@ -155,17 +155,11 @@ const FromCreateRecords = (props) => {
           Cancel
         </Button>
         <Button
-          onClick={
-            validator
-              ? () => {
-                  handleValidatorEmail();
-                  handleCloseSaveRecord(
-                    document.querySelectorAll("#my-input")[0]
-                  );
-                  setValidator(false);
-                }
-              : undefined
-          }
+          disabled={!validator}
+          onClick={() => {
+            handleCloseSaveRecord(document.querySelectorAll("#my-input")[0]);
+            setValidator(false);
+          }}
           color="primary"
         >
           Guardar
