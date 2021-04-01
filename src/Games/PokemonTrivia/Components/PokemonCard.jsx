@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import clsx from "clsx";
 import UseStyles from "../Style/PokemonCardStyle.jsx";
 import { getDataPokemon, reducer, initialState } from "../Data/PokemonList.jsx";
@@ -8,7 +8,17 @@ import "../Style/PokemonCardStyle.css";
 import { Card } from "@material-ui/core";
 const PokemonCard = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { counter, Result, flip, img, title, buttonMap, question, nextRound } = state;
+  const [first, setfirst] = useState(true);
+  const {
+    counter,
+    Result,
+    flip,
+    img,
+    title,
+    buttonMap,
+    question,
+    nextRound,
+  } = state;
   const clases = UseStyles();
   useEffect(() => {
     if (flip) {
@@ -20,13 +30,23 @@ const PokemonCard = () => {
         }, 450);
       }
     }
-    getDataPokemon(dispatch);
-  }, [flip]);
+    if (first) {
+      getDataPokemon(dispatch);
+      setfirst(false);
+    }
+  }, [flip, first, counter]);
   return (
     <Card id="PokemonCard" className={clsx(clases.Card)}>
       <TextAndImg props={{ title, img, question, counter }} />
       <Botonesdeopciones
-        props={{ dispatch, buttonMap, Result, counter, getDataPokemon, nextRound }}
+        props={{
+          dispatch,
+          buttonMap,
+          Result,
+          counter,
+          getDataPokemon,
+          nextRound,
+        }}
       />
     </Card>
   );

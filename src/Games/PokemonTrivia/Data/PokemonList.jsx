@@ -149,7 +149,6 @@ const reducer = (state, action) => {
         Result: action.result,
         img: action.img,
         title: action.title,
-        flip: false,
         buttonMap: action.buttonMap,
         question: action.bolean
           ? "¿Quien es este Pokemon?"
@@ -162,7 +161,7 @@ const reducer = (state, action) => {
         img: action.img,
         title: action.title,
         nextRound: true,
-        flip: false,
+        flip: true,
         counter: 0,
         buttonMap: action.buttonMap,
         question: action.bolean
